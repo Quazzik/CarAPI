@@ -3,3 +3,5 @@ obj/
 /packages/
 riderModule.iml
 /_ReSharper.Caches/
+*.db-wal
+CarAPI/cars.db-shm

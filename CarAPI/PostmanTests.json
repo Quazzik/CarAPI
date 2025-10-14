@@ -1,0 +1,439 @@
+{
+  "info": {
+    "name": "CarAPI Collection",
+    "description": "Полная коллекция для тестирования CarAPI (порт 5212)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Car Brands",
+      "item": [
+        {
+          "name": "Get All Car Brands",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5212/api/carbrands",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5212",
+              "path": ["api", "carbrands"]
+            },
+            "description": "Получить все марки автомобилей"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Car Brand By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5212/api/carbrands/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5212",
+              "path": ["api", "carbrands", "1"]
+            },
+            "description": "Получить марку автомобиля по ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Create New Car Brand",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Audi\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5212/api/carbrands",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5212",
+              "path": ["api", "carbrands"]
+            },
+            "description": "Создать новую марку автомобиля"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Car Brand",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Toyota Updated\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5212/api/carbrands/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5212",
+              "path": ["api", "carbrands", "1"]
+            },
+            "description": "Обновить марку автомобиля"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Car Brand",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5212/api/carbrands/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5212",
+              "path": ["api", "carbrands", "1"]
+            },
+            "description": "Удалить марку автомобиля"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Trim Levels",
+      "item": [
+        {
+          "name": "Get All Trim Levels",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5212/api/trimlevels",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5212",
+              "path": ["api", "trimlevels"]
+            },
+            "description": "Получить все комплектации"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Trim Level By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5212/api/trimlevels/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5212",
+              "path": ["api", "trimlevels", "1"]
+            },
+            "description": "Получить комплектацию по ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Create New Trim Level",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Luxury\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5212/api/trimlevels",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5212",
+              "path": ["api", "trimlevels"]
+            },
+            "description": "Создать новую комплектацию"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Trim Level",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Premium Plus\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5212/api/trimlevels/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5212",
+              "path": ["api", "trimlevels", "1"]
+            },
+            "description": "Обновить комплектацию"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Trim Level",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5212/api/trimlevels/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5212",
+              "path": ["api", "trimlevels", "1"]
+            },
+            "description": "Удалить комплектацию"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Cars",
+      "item": [
+        {
+          "name": "Get All Cars",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5212/api/cars",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5212",
+              "path": ["api", "cars"]
+            },
+            "description": "Получить все автомобили с деталями"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Car By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5212/api/cars/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5212",
+              "path": ["api", "cars", "1"]
+            },
+            "description": "Получить автомобиль по ID с деталями"
+          },
+          "response": []
+        },
+        {
+          "name": "Create New Car",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"A6\",\n  \"carBrandId\": 1,\n  \"trimLevelId\": 1\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5212/api/cars",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5212",
+              "path": ["api", "cars"]
+            },
+            "description": "Создать новый автомобиль"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Car",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Camry Hybrid\",\n  \"carBrandId\": 1,\n  \"trimLevelId\": 2\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5212/api/cars/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5212",
+              "path": ["api", "cars", "1"]
+            },
+            "description": "Обновить автомобиль"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Car",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5212/api/cars/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5212",
+              "path": ["api", "cars", "1"]
+            },
+            "description": "Удалить автомобиль"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Test Scenarios",
+      "item": [
+        {
+          "name": "Complete Flow Test",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5212/api/cars",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5212",
+              "path": ["api", "cars"]
+            },
+            "description": "Полный тестовый сценарий: получить все автомобили"
+          },
+          "response": []
+        },
+        {
+          "name": "Create and Verify Car",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Сначала создаем новую марку",
+                  "pm.sendRequest({",
+                  "  url: 'http://localhost:5212/api/carbrands',",
+                  "  method: 'POST',",
+                  "  header: {",
+                  "    'Content-Type': 'application/json'",
+                  "  },",
+                  "  body: {",
+                  "    mode: 'raw',",
+                  "    raw: JSON.stringify({ name: 'Test Brand' })",
+                  "  }",
+                  "}, function (err, response) {",
+                  "  console.log('Created brand:', response.json());",
+                  "  var brandId = response.json().id;",
+                  "  ",
+                  "  // Затем создаем новую комплектацию",
+                  "  pm.sendRequest({",
+                  "    url: 'http://localhost:5212/api/trimlevels',",
+                  "    method: 'POST',",
+                  "    header: {",
+                  "      'Content-Type': 'application/json'",
+                  "    },",
+                  "    body: {",
+                  "      mode: 'raw',",
+                  "      raw: JSON.stringify({ name: 'Test Trim' })",
+                  "    }",
+                  "  }, function (err, response) {",
+                  "    console.log('Created trim:', response.json());",
+                  "    var trimId = response.json().id;",
+                  "    ",
+                  "    // Наконец создаем автомобиль",
+                  "    pm.sendRequest({",
+                  "      url: 'http://localhost:5212/api/cars',",
+                  "      method: 'POST',",
+                  "      header: {",
+                  "        'Content-Type': 'application/json'",
+                  "      },",
+                  "      body: {",
+                  "        mode: 'raw',",
+                  "        raw: JSON.stringify({ ",
+                  "          name: 'Test Car', ",
+                  "          carBrandId: brandId, ",
+                  "          trimLevelId: trimId ",
+                  "        })",
+                  "      }",
+                  "    }, function (err, response) {",
+                  "      console.log('Created car:', response.json());",
+                  "      pm.test('Car created successfully', function () {",
+                  "        pm.expect(response.code).to.equal(201);",
+                  "        pm.expect(response.json().name).to.equal('Test Car');",
+                  "      });",
+                  "    });",
+                  "  });",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5212"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "console.log('Testing CarAPI on port 5212');"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "pm.test('Status code is 200', function () {",
+          "  pm.response.to.have.status(200);",
+          "});",
+          "",
+          "pm.test('Response time is acceptable', function () {",
+          "  pm.expect(pm.response.responseTime).to.be.below(1000);",
+          "});"
+        ]
+      }
+    }
+  ]
+}

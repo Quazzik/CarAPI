@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CarAPI.Repositories;
 
-public class UserRepository
+public class AuthRepository
 {
     private readonly AuthDbContext _context;
     private readonly DbSet<User> _dbSet;
 
-    public UserRepository(AuthDbContext context)
+    public AuthRepository(AuthDbContext context)
     {
         _context = context;
         _dbSet = context.Set<User>();
@@ -17,7 +17,8 @@ public class UserRepository
 
     public async Task<User?> GetByLoginAsync(string login)
     {
-        return await _dbSet.FirstOrDefaultAsync(u => u.Login == login);
+        var res = await _dbSet.FirstOrDefaultAsync(u => u.Login == login);
+        return res;
     }
 
     public async Task<User> AddAsync(User user)

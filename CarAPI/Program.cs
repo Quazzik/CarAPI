@@ -52,7 +52,7 @@ builder.Services.AddAutoMapper(opt => opt.AddProfile<MappingProfile>());
 
 
 // Add repositories
-builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<AuthRepository>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<ICarRepository, CarRepository>();
 

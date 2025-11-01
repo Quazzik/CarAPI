@@ -1,0 +1,47 @@
+@page
+@model CarWebApp.Pages.RegisterModel
+@{
+    ViewData["Title"] = "Регистрация";
+}
+
+<h2>Регистрация</h2>
+
+<form method="post" class="mb-3">
+    <div class="mb-3">
+        <label class="form-label">Логин</label>
+        <input type="text" asp-for="Login" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Пароль</label>
+        <input type="password" asp-for="Password" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Повторите пароль</label>
+        <input type="password" asp-for="ConfirmPassword" class="form-control" required />
+    </div>
+    <div class="mb-3 text-danger">
+        @Html.ValidationSummary()
+    </div>
+    <button type="submit" class="btn btn-success">Зарегистрироваться</button>
+</form>
+
+<p>Уже есть аккаунт? <a asp-page="/Login">Войти</a></p>
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <div class="alert alert-danger">@Model.ErrorMessage</div>
+}
+
+@section Scripts {
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function (e) {
+            const password = document.querySelector('input[name="Password"]').value;
+            const confirm = document.querySelector('input[name="ConfirmPassword"]').value;
+            if (password !== confirm) {
+                e.preventDefault();
+                alert('Пароли не совпадают!');
+            }
+        });
+    </script>
+}

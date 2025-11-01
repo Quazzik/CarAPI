@@ -1,11 +1,11 @@
-using CarWebApp.Models; // Пути к CarDto, CreateCarDto
+using CarWebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Net.Http.Json;
 
 namespace CarWebApp.Pages
 {
-    public class IndexModel : PageModel
+    public class IndexModel : BasePageModel
     {
         private readonly IHttpClientFactory _factory;
 
@@ -18,41 +18,60 @@ namespace CarWebApp.Pages
         public List<EntityDto> Brands { get; set; } = new();
         public List<EntityDto> Trims { get; set; } = new();
 
-        [BindProperty] public CreateCarDto NewCar { get; set; } = new();
+        [BindProperty] public CarDto NewCar { get; set; } = new();
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
+            // 🔹 Проверка авторизации
+            var redirect = CheckAuthorization();
+            if (redirect != null) return redirect;
+
             var client = _factory.CreateClient("CarAPI");
+            AddJwtHeader(client);
+
             Cars = await client.GetFromJsonAsync<List<CarDto>>("Cars") ?? new();
             Brands = await client.GetFromJsonAsync<List<EntityDto>>("CarBrands") ?? new();
             Trims = await client.GetFromJsonAsync<List<EntityDto>>("TrimLevels") ?? new();
+
+            return Page();
         }
 
+        // Создание автомобиля
         public async Task<IActionResult> OnPostCreateAsync()
         {
+            var redirect = CheckAuthorization();
+            if (redirect != null) return redirect;
+
             var client = _factory.CreateClient("CarAPI");
+            AddJwtHeader(client);
+
             await client.PostAsJsonAsync("Cars", NewCar);
             return RedirectToPage();
         }
 
-        public async Task<IActionResult> OnPostEditAsync(int Id, string Name, int CarBrandId, int TrimLevelId, int Amount)
+        // Удаление автомобиля
+        public async Task<IActionResult> OnPostDeleteAsync(int id)
         {
+            var redirect = CheckAuthorization();
+            if (redirect != null) return redirect;
+
             var client = _factory.CreateClient("CarAPI");
-            var car = new CreateCarDto
-            {
-                Name = Name,
-                CarBrandId = CarBrandId,
-                TrimLevelId = TrimLevelId,
-                Amount = Amount
-            };
-            await client.PutAsJsonAsync($"Cars/{Id}", car);
+            AddJwtHeader(client);
+
+            await client.DeleteAsync($"Cars/{id}");
             return RedirectToPage();
         }
 
-        public async Task<IActionResult> OnPostDeleteAsync(int id)
+        // Редактирование автомобиля
+        public async Task<IActionResult> OnPostEditAsync(CarDto car)
         {
+            var redirect = CheckAuthorization();
+            if (redirect != null) return redirect;
+
             var client = _factory.CreateClient("CarAPI");
-            await client.DeleteAsync($"Cars/{id}");
+            AddJwtHeader(client);
+
+            await client.PutAsJsonAsync($"Cars/{car.Id}", car);
             return RedirectToPage();
         }
     }

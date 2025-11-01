@@ -20,9 +20,10 @@
                     @b.Name
                     <div>
                         <button class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#editBrandModal-@b.Id">Редактировать</button>
-                        <form method="post" asp-page-handler="Delete" class="d-inline">
+
+                        <!-- Форма удаления бренда -->
+                        <form method="post" asp-page-handler="DeleteBrand" class="d-inline">
                             <input type="hidden" name="id" value="@b.Id" />
-                            <input type="hidden" name="type" value="brand" />
                             <button type="submit" class="btn btn-sm btn-danger">Удалить</button>
                         </form>
                     </div>
@@ -66,9 +67,10 @@
                     @t.Name
                     <div>
                         <button class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#editTrimModal-@t.Id">Редактировать</button>
-                        <form method="post" asp-page-handler="Delete" class="d-inline">
+
+                        <!-- Форма удаления комплектации -->
+                        <form method="post" asp-page-handler="DeleteTrim" class="d-inline">
                             <input type="hidden" name="id" value="@t.Id" />
-                            <input type="hidden" name="type" value="trim" />
                             <button type="submit" class="btn btn-sm btn-danger">Удалить</button>
                         </form>
                     </div>

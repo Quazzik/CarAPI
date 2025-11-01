@@ -11,20 +11,20 @@ namespace CarAPI.Services;
 
 public class AuthService
 {
-    private readonly UserRepository _userRepository;
+    private readonly AuthRepository _authRepository;
     private readonly IMapper _mapper;
     private readonly JwtSettings _jwtSettings;
 
-    public AuthService(UserRepository userRepository, IMapper mapper, JwtSettings jwtSettings)
+    public AuthService(AuthRepository authRepository, IMapper mapper, JwtSettings jwtSettings)
     {
-        _userRepository = userRepository;
+        _authRepository = authRepository;
         _mapper = mapper;
         _jwtSettings = jwtSettings;
     }
 
     public async Task<AuthResponseDto> RegisterAsync(UserDataDto userData)
     {
-        if (await _userRepository.ExistsAsync(userData.Login))
+        if (await _authRepository.ExistsAsync(userData.Login))
             throw new ArgumentException("User with this login already exists");
 
         var user = new User
@@ -33,7 +33,7 @@ public class AuthService
             Password = HashPassword(userData.Password)
         };
 
-        var createdUser = await _userRepository.AddAsync(user);
+        var createdUser = await _authRepository.AddAsync(user);
 
         var token = GenerateJwtToken(createdUser);
 
@@ -46,10 +46,11 @@ public class AuthService
 
     public async Task<AuthResponseDto> LoginAsync(UserDataDto userData)
     {
-        var user = await _userRepository.GetByLoginAsync(userData.Login);
+        var user = await _authRepository.GetByLoginAsync(userData.Login);
         if (user == null || !VerifyPassword(userData.Password, user.Password))
             throw new ArgumentException("Invalid login or password");
-
+        if (!user.Verified)
+            throw new ArgumentException("User is not verified");
         var token = GenerateJwtToken(user);
 
         return new AuthResponseDto

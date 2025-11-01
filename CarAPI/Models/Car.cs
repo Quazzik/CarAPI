@@ -7,5 +7,7 @@ namespace CarAPI.Models
         
         public int TrimLevelId { get; set; }
         public virtual TrimLevel TrimLevel { get; set; } = null!;
+
+        public int Amount { get; set; } = 0;
     }
 }

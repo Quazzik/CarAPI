@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using CarAPI.Services;
 using CarAPI.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CarAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class CarsController : ControllerBase
     {
         private readonly CarService _carService;

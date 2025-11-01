@@ -3,12 +3,8 @@ using CarAPI.Models;
 
 namespace CarAPI.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-        {
-        }
-
         public DbSet<Car> Cars { get; set; }
         public DbSet<CarBrand> CarBrands { get; set; }
         public DbSet<TrimLevel> TrimLevels { get; set; }

@@ -12,6 +12,7 @@ namespace CarAPI.Mapping
             CreateMap<TrimLevel, EntityDto>();
             CreateMap<CreateEntityDto, CarBrand>();
             CreateMap<CreateEntityDto, TrimLevel>();
+            CreateMap<User, UserDto>();
             
             CreateMap<Car, CarDto>()
                 .ForMember(dest => dest.CarBrandName,

@@ -3,6 +3,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+builder.Services.AddHttpClient("CarAPI", client =>
+{
+    client.BaseAddress = new Uri("http://localhost:5212/api/");
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

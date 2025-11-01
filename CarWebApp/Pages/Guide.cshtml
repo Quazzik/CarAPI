@@ -1,0 +1,45 @@
+@page
+@model CarWebApp.Pages.GuideModel
+@{
+    ViewData["Title"] = "Reference Guide";
+}
+
+<h1>Reference Guide</h1>
+
+<h2>Car Brands</h2>
+<form method="post" asp-page-handler="AddBrand">
+    <input asp-for="NewBrand.Name" placeholder="Brand name" required />
+    <button type="submit">Add</button>
+</form>
+<ul>
+    @foreach (var b in Model.Brands)
+    {
+        <li>
+            @b.Name
+            <form method="post" style="display:inline" asp-page-handler="Delete">
+                <input type="hidden" name="id" value="@b.Id" />
+                <input type="hidden" name="type" value="brand" />
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+    }
+</ul>
+
+<h2>Trim Levels</h2>
+<form method="post" asp-page-handler="AddTrim">
+    <input asp-for="NewTrim.Name" placeholder="Trim name" required />
+    <button type="submit">Add</button>
+</form>
+<ul>
+    @foreach (var t in Model.Trims)
+    {
+        <li>
+            @t.Name
+            <form method="post" style="display:inline" asp-page-handler="Delete">
+                <input type="hidden" name="id" value="@t.Id" />
+                <input type="hidden" name="type" value="trim" />
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+    }
+</ul>

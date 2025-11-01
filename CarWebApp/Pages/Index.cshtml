@@ -1,10 +1,60 @@
 ﻿@page
-@model IndexModel
+@model CarWebApp.Pages.IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Cars";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>Cars</h1>
+
+<form method="post" asp-page-handler="Create">
+    <div>
+        <label>Name:</label>
+        <input asp-for="NewCar.Name" required />
+    </div>
+    <div>
+        <label>Brand:</label>
+        <select asp-for="NewCar.CarBrandId">
+            @foreach (var b in Model.Brands)
+            {
+                <option value="@b.Id">@b.Name</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label>Trim:</label>
+        <select asp-for="NewCar.TrimLevelId">
+            @foreach (var t in Model.Trims)
+            {
+                <option value="@t.Id">@t.Name</option>
+            }
+        </select>
+    </div>
+    <button type="submit">Add Car</button>
+</form>
+
+<hr />
+
+<table border="1" cellpadding="5">
+    <thead>
+    <tr>
+        <th>ID</th><th>Name</th><th>Brand</th><th>Trim</th><th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var c in Model.Cars)
+    {
+        <tr>
+            <td>@c.Id</td>
+            <td>@c.Name</td>
+            <td>@c.CarBrandName</td>
+            <td>@c.TrimLevelName</td>
+            <td>
+                <form method="post" asp-page-handler="Delete">
+                    <input type="hidden" name="id" value="@c.Id" />
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

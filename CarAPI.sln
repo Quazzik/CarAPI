@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarAPI", "CarAPI\CarAPI.csproj", "{4EA22927-7FC2-4B7C-8D02-E9F8C890A227}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarWebApp", "CarWebApp\CarWebApp.csproj", "{ED965AA1-06A7-46F7-AAE5-90EE61058385}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{4EA22927-7FC2-4B7C-8D02-E9F8C890A227}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EA22927-7FC2-4B7C-8D02-E9F8C890A227}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EA22927-7FC2-4B7C-8D02-E9F8C890A227}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED965AA1-06A7-46F7-AAE5-90EE61058385}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED965AA1-06A7-46F7-AAE5-90EE61058385}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED965AA1-06A7-46F7-AAE5-90EE61058385}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED965AA1-06A7-46F7-AAE5-90EE61058385}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

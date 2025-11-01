@@ -1,60 +1,128 @@
 ﻿@page
 @model CarWebApp.Pages.IndexModel
 @{
-    ViewData["Title"] = "Cars";
+    ViewData["Title"] = "Машины";
 }
 
-<h1>Cars</h1>
+<h1 class="mb-4">Машины</h1>
 
-<form method="post" asp-page-handler="Create">
-    <div>
-        <label>Name:</label>
-        <input asp-for="NewCar.Name" required />
+<!-- Форма добавления -->
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="post" asp-page-handler="Create" class="row g-3 align-items-end">
+            <div class="col-md-4">
+                <label asp-for="NewCar.Name" class="form-label">Название</label>
+                <input asp-for="NewCar.Name" class="form-control" required />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="NewCar.CarBrandId" class="form-label">Марка</label>
+                <select asp-for="NewCar.CarBrandId" class="form-select">
+                    @foreach (var b in Model.Brands)
+                    {
+                        <option value="@b.Id">@b.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label asp-for="NewCar.TrimLevelId" class="form-label">Комплектация</label>
+                <select asp-for="NewCar.TrimLevelId" class="form-select">
+                    @foreach (var t in Model.Trims)
+                    {
+                        <option value="@t.Id">@t.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">Добавить</button>
+            </div>
+        </form>
     </div>
-    <div>
-        <label>Brand:</label>
-        <select asp-for="NewCar.CarBrandId">
-            @foreach (var b in Model.Brands)
-            {
-                <option value="@b.Id">@b.Name</option>
-            }
-        </select>
-    </div>
-    <div>
-        <label>Trim:</label>
-        <select asp-for="NewCar.TrimLevelId">
-            @foreach (var t in Model.Trims)
-            {
-                <option value="@t.Id">@t.Name</option>
-            }
-        </select>
-    </div>
-    <button type="submit">Add Car</button>
-</form>
+</div>
 
-<hr />
-
-<table border="1" cellpadding="5">
-    <thead>
-    <tr>
-        <th>ID</th><th>Name</th><th>Brand</th><th>Trim</th><th></th>
-    </tr>
+<!-- Таблица автомобилей -->
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Название</th>
+            <th>Марка</th>
+            <th>Комплектация</th>
+            <th>Действия</th>
+        </tr>
     </thead>
     <tbody>
-    @foreach (var c in Model.Cars)
-    {
-        <tr>
-            <td>@c.Id</td>
-            <td>@c.Name</td>
-            <td>@c.CarBrandName</td>
-            <td>@c.TrimLevelName</td>
-            <td>
-                <form method="post" asp-page-handler="Delete">
-                    <input type="hidden" name="id" value="@c.Id" />
-                    <button type="submit">Delete</button>
-                </form>
-            </td>
-        </tr>
-    }
+        @foreach (var car in Model.Cars)
+        {
+            <tr>
+                <td>@car.Id</td>
+                <td>@car.Name</td>
+                <td>@car.CarBrandName</td>
+                <td>@car.TrimLevelName</td>
+                <td>
+                    <button class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#editCarModal-@car.Id">Редактировать</button>
+                    <form method="post" asp-page-handler="Delete" class="d-inline">
+                        <input type="hidden" name="id" value="@car.Id" />
+                        <button type="submit" class="btn btn-sm btn-danger">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+
+            <!-- Модальное окно редактирования -->
+            <div class="modal fade" id="editCarModal-@car.Id" tabindex="-1" aria-labelledby="editCarLabel-@car.Id" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form method="post" asp-page-handler="Edit">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editCarLabel-@car.Id">Редактировать автомобиль</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" name="Id" value="@car.Id" />
+                                <div class="mb-3">
+                                    <label class="form-label">Название</label>
+                                    <input type="text" name="Name" value="@car.Name" class="form-control" required />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Марка</label>
+                                    <select name="CarBrandId" class="form-select">
+                                        @foreach (var b in Model.Brands)
+                                        {
+                                            if (b.Id == car.CarBrandId)
+                                            {
+                                                <option value="@b.Id" selected>@b.Name</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@b.Id">@b.Name</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Комплектация</label>
+                                        <select name="TrimLevelId" class="form-select">
+                                            @foreach (var t in Model.Trims)
+                                            {
+                                                if (t.Id == car.TrimLevelId)
+                                                {
+                                                    <option value="@t.Id" selected>@t.Name</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@t.Id">@t.Name</option>
+                                                }
+                                            }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                                <button type="submit" class="btn btn-primary">Сохранить</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
     </tbody>
 </table>

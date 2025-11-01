@@ -43,5 +43,14 @@ namespace CarWebApp.Pages
             await client.DeleteAsync($"cars/{id}");
             return RedirectToPage();
         }
+        
+        public async Task<IActionResult> OnPostEditAsync(int Id, string Name, int CarBrandId, int TrimLevelId)
+        {
+            var client = _factory.CreateClient("CarAPI");
+            var car = new CreateCarDto { Name = Name, CarBrandId = CarBrandId, TrimLevelId = TrimLevelId };
+            var resp = await client.PutAsJsonAsync($"Cars/{Id}", car);
+            return RedirectToPage();
+        }
+
     }
 }

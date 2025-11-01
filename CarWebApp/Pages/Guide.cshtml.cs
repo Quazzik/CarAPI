@@ -44,5 +44,20 @@ namespace CarWebApp.Pages
             else if (type == "trim") await client.DeleteAsync($"trimlevels/{id}");
             return RedirectToPage();
         }
+        
+        public async Task<IActionResult> OnPostEditBrandAsync(int Id, string Name)
+        {
+            var client = _factory.CreateClient("CarAPI");
+            await client.PutAsJsonAsync($"CarBrands/{Id}", new { Name });
+            return RedirectToPage();
+        }
+
+        public async Task<IActionResult> OnPostEditTrimAsync(int Id, string Name)
+        {
+            var client = _factory.CreateClient("CarAPI");
+            await client.PutAsJsonAsync($"TrimLevels/{Id}", new { Name });
+            return RedirectToPage();
+        }
+
     }
 }

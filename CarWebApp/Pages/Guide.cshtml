@@ -1,45 +1,101 @@
 @page
 @model CarWebApp.Pages.GuideModel
 @{
-    ViewData["Title"] = "Reference Guide";
+    ViewData["Title"] = "Справочники";
 }
 
-<h1>Reference Guide</h1>
+<h1 class="mb-4">Справочники</h1>
 
-<h2>Car Brands</h2>
-<form method="post" asp-page-handler="AddBrand">
-    <input asp-for="NewBrand.Name" placeholder="Brand name" required />
-    <button type="submit">Add</button>
-</form>
-<ul>
-    @foreach (var b in Model.Brands)
-    {
-        <li>
-            @b.Name
-            <form method="post" style="display:inline" asp-page-handler="Delete">
-                <input type="hidden" name="id" value="@b.Id" />
-                <input type="hidden" name="type" value="brand" />
-                <button type="submit">Delete</button>
-            </form>
-        </li>
-    }
-</ul>
+<div class="row">
+    <div class="col-md-6">
+        <h3>Марки</h3>
+        <form method="post" asp-page-handler="AddBrand" class="d-flex mb-3">
+            <input asp-for="NewBrand.Name" class="form-control me-2" placeholder="Название марки" required />
+            <button type="submit" class="btn btn-primary">Добавить</button>
+        </form>
+        <ul class="list-group">
+            @foreach (var b in Model.Brands)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    @b.Name
+                    <div>
+                        <button class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#editBrandModal-@b.Id">Редактировать</button>
+                        <form method="post" asp-page-handler="Delete" class="d-inline">
+                            <input type="hidden" name="id" value="@b.Id" />
+                            <input type="hidden" name="type" value="brand" />
+                            <button type="submit" class="btn btn-sm btn-danger">Удалить</button>
+                        </form>
+                    </div>
 
-<h2>Trim Levels</h2>
-<form method="post" asp-page-handler="AddTrim">
-    <input asp-for="NewTrim.Name" placeholder="Trim name" required />
-    <button type="submit">Add</button>
-</form>
-<ul>
-    @foreach (var t in Model.Trims)
-    {
-        <li>
-            @t.Name
-            <form method="post" style="display:inline" asp-page-handler="Delete">
-                <input type="hidden" name="id" value="@t.Id" />
-                <input type="hidden" name="type" value="trim" />
-                <button type="submit">Delete</button>
-            </form>
-        </li>
-    }
-</ul>
+                    <!-- Модалка редактирования бренда -->
+                    <div class="modal fade" id="editBrandModal-@b.Id" tabindex="-1" aria-labelledby="editBrandLabel-@b.Id" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form method="post" asp-page-handler="EditBrand">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editBrandLabel-@b.Id">Редактировать марку</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <input type="hidden" name="Id" value="@b.Id" />
+                                        <input type="text" name="Name" value="@b.Name" class="form-control" required />
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+
+    <div class="col-md-6">
+        <h3>Комплектации</h3>
+        <form method="post" asp-page-handler="AddTrim" class="d-flex mb-3">
+            <input asp-for="NewTrim.Name" class="form-control me-2" placeholder="Название комплектации" required />
+            <button type="submit" class="btn btn-primary">Добавить</button>
+        </form>
+        <ul class="list-group">
+            @foreach (var t in Model.Trims)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    @t.Name
+                    <div>
+                        <button class="btn btn-sm btn-warning me-1" data-bs-toggle="modal" data-bs-target="#editTrimModal-@t.Id">Редактировать</button>
+                        <form method="post" asp-page-handler="Delete" class="d-inline">
+                            <input type="hidden" name="id" value="@t.Id" />
+                            <input type="hidden" name="type" value="trim" />
+                            <button type="submit" class="btn btn-sm btn-danger">Удалить</button>
+                        </form>
+                    </div>
+
+                    <!-- Модалка редактирования комплектации -->
+                    <div class="modal fade" id="editTrimModal-@t.Id" tabindex="-1" aria-labelledby="editTrimLabel-@t.Id" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form method="post" asp-page-handler="EditTrim">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editTrimLabel-@t.Id">Редактировать комплектацию</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <input type="hidden" name="Id" value="@t.Id" />
+                                        <input type="text" name="Name" value="@t.Name" class="form-control" required />
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

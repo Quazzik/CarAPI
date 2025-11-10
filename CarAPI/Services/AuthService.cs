@@ -78,13 +78,7 @@ public class AuthService
         return tokenHandler.WriteToken(token);
     }
 
-    private string HashPassword(string password)
-    {
-        return BCrypt.Net.BCrypt.HashPassword(password);
-    }
+    private string HashPassword(string password) => BCrypt.Net.BCrypt.HashPassword(password);
 
-    private bool VerifyPassword(string password, string passwordHash)
-    {
-        return BCrypt.Net.BCrypt.Verify(password, passwordHash);
-    }
+    private bool VerifyPassword(string password, string passwordHash) => BCrypt.Net.BCrypt.Verify(password, passwordHash);
 }
